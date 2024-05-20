@@ -2,7 +2,6 @@ package com.word.count;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
