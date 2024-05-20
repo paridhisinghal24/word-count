@@ -20,8 +20,7 @@ public class WordCountRunner implements CommandLineRunner {
 	private TopNWordService topNWordService;
 	
     public void run(String... args) throws MalformedURLException, IOException, InterruptedException, ExecutionException {
-    	Set<String>  topTenWords = topNWordService.topNWords(TOP_N_WORDS);
-    	System.out.print(topTenWords);
+    	 topNWordService.topNWords(TOP_N_WORDS);
     }
 
 }

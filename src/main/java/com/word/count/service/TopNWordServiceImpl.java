@@ -33,7 +33,7 @@ public class TopNWordServiceImpl implements TopNWordService {
 	@Autowired
 	private  GetEssayConcurrent getEssayMultithread;
 	
-	public Set<String> topNWords(int top) throws MalformedURLException, IOException, InterruptedException, ExecutionException{
+	public void topNWords(int top) throws MalformedURLException, IOException, InterruptedException, ExecutionException{
 		
 		Set<String> validBankOfWords = getValidWords();
 		
@@ -43,7 +43,6 @@ public class TopNWordServiceImpl implements TopNWordService {
 				
 		List<Map.Entry<String, Integer>> result = getTopNWords(wordCountMap, top);
 		System.out.println(prettyPrintJson(result));
-		return null;
 	}
 
 	private static String prettyPrintJson(List<Map.Entry<String, Integer>> list) {

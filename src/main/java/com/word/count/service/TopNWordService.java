@@ -7,6 +7,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public interface TopNWordService {
-	public Set<String> topNWords(int top)
+	public void topNWords(int top)
 			throws MalformedURLException, IOException, InterruptedException, ExecutionException;
 }

@@ -15,14 +15,12 @@ import com.google.common.util.concurrent.RateLimiter;
 public class WordCountTask implements Callable<HashMap<String, Integer>> {
 	private final String essayUrl;
 	private final Set<String> validBankOfWords;
-	private final int i;
 
-    private static RateLimiter rateLimiter = RateLimiter.create(1.0); // 1 permit per second
+    private static RateLimiter rateLimiter = RateLimiter.create(1.0); // 1 request per second
 
-	public WordCountTask(String essayUrl, Set<String> validBankOfWords, int i) {
+	public WordCountTask(String essayUrl, Set<String> validBankOfWords) {
 		this.essayUrl = essayUrl;
 		this.validBankOfWords = validBankOfWords;
-		this.i = i;
 	}
 
 	@Override
@@ -33,14 +31,12 @@ public class WordCountTask implements Callable<HashMap<String, Integer>> {
 		String[] words = essayData.split("\\s+");
 		for (String word : words) {
 			if (validBankOfWords.contains(word)) {
-				word = word.replaceAll("[^a-zA-Z]", "").toLowerCase(); // Remove non-alphabetic characters
+				word = word.replaceAll("[^a-zA-Z]", "").toLowerCase(); 
 				if (!word.isEmpty()) {
 					wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
 				}
 			}
-		}
-		System.out.println(i);
-
+		}		
 		return wordCountMap;
 	}
 
@@ -56,12 +52,6 @@ public class WordCountTask implements Callable<HashMap<String, Integer>> {
 			return essayData.toString();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
-			if(e.getMessage().contains("999")) {
-			   System.out.println("End time");
-			    System.out.println(Instant.now());
-			    System.exit(0);
-		//	Thread.sleep(null);
-			}
 		}
 		return essayData.toString();
 	}
